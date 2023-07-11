@@ -1,0 +1,20 @@
+{
+  "coauthors": {
+    "DO": {
+      "name": "David Ozowara",
+      "email": "daveozzy6@gmail.com"
+    },
+    "BF": {
+      "name": "Bemi Folayan ",
+      "email": "gbemifolayan@wustl.edu"
+    },
+    "JS": {
+        "name": "Jesus Santana",
+        "email": "Jscheveto7@gmail.com"
+      },
+    "DL": {
+    "name": "Dayra Leon",
+    "email": "Leonndayra@gmail.com"
+    }
+  }
+}
