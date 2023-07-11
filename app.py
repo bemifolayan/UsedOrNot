@@ -11,12 +11,15 @@ app.config['SECRET_KEY'] = key
 @app.route("/")
 @app.route("/index")
 def index():
-    return redirect(url_for('index'))
+    return render_template('index.html')
     
 @app.route("/liked")
 def liked():
-    return redirect(url_for('liked'))
+    return render_template('liked.html')
 
+@app.route("/products")
+def products():
+    return render_template('products.html')
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0", port = 8001)
