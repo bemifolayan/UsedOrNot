@@ -49,7 +49,7 @@ class Zappos:
         - product_names (dict): A dictionary where the keys are the positions and the values are the product names.
         - None: If the input JSON data is None.
         """
-        if data_df is None:
+        if data is None:
             return None
 
         product_names = {}
@@ -58,73 +58,78 @@ class Zappos:
         return product_names
 
 
-    # def extract_product_images(self, json_data):
-    #     """
-    #     Extracts the images of the products from the JSON data.
+    def extract_product_images(self, data):
+        """
+        Extracts the images of the products from the JSON data.
 
-    #     Args:
-    #     - json_data (dict): The JSON response from the eBay API.
+        Args:
+        - json_data (dict): The JSON response from the Zappos API.
 
-    #     Returns:
-    #     - product_images (dict): A dictionary where the keys are the positions and the values are the product images.
-    #     - None: If the input JSON data is None.
-    #     """
-    #     if json_data is None:
-    #         return None
+        Returns:
+        - product_images (dict): A dictionary where the keys are the positions and the values are the product images.
+        - None: If the input JSON data is None.
+        """
+        if data is None:
+            return None
 
-    #     product_images = json_data[]
         
+        product_images = {}
+        for x in range(len(data)):
+            product_images[x] = data[x]["thumbnailImageUrl"]
 
-    #     return product_images
+        return product_images
+
+
+    def extract_product_prices(self, data):
+        """
+        Extracts the prices of the products from the JSON data.
+
+        Args:
+        - json_data (dict): The JSON response from the eBay API.
+
+        Returns:
+        - product_prices (dict): A dictionary where the keys are the positions and the values are the product prices.
+        - None: If the input JSON data is None.
+        """
+        if data is None:
+            return None
+
+        product_prices = {}
+
+        for x in range(len(data)):
+            product_prices[x] = data[x]["price"]
+
+        return product_prices
+
+
+    def extract_product_links(self, data):
+        """
+        Extracts the product links from the JSON data.
+
+        Args:
+        - json_data (dict): The JSON response from the eBay API.
+
+        Returns:
+        - product_links (dict): A dict of the links of the first 10 products.
+        - None: If the input JSON data is None.
+        """
+        if data is None:
+            return None
+
+        product_links = {}
+
+        for x in range(len(data)):
+            product_links[x] = data[x]["productUrl"]
+
+        return product_links
 
 zappos = Zappos("shoes", 61455)
 data = zappos.search()
 data_df = pd.DataFrame.from_dict(data)
 names = zappos.extract_product_names(data)
-print(names)
-
-    # def extract_product_prices(self, json_data):
-    #     """
-    #     Extracts the prices of the products from the JSON data.
-
-    #     Args:
-    #     - json_data (dict): The JSON response from the eBay API.
-
-    #     Returns:
-    #     - product_prices (dict): A dictionary where the keys are the positions and the values are the product prices.
-    #     - None: If the input JSON data is None.
-    #     """
-    #     if json_data is None:
-    #         return None
-
-    #     product_prices = {}
-    #     products = json_data['search_results']
-
-    #     for item in products[:10]:
-    #         price = item['price']['value']
-    #         product_prices[item['position']] = price
-
-    #     return product_prices
-
-    # def extract_product_links(self,json_data):
-    #     """
-    #     Extracts the product links from the JSON data.
-
-    #     Args:
-    #     - json_data (dict): The JSON response from the eBay API.
-
-    #     Returns:
-    #     - product_links (dict): A dict of the links of the first 10 products.
-    #     - None: If the input JSON data is None.
-    #     """
-    #     products = json_data['search_results']
-
-    #     product_links = {}
-    #     for item in products[:10]:  # Extract links from the first 10 products
-    #         link = item["link"]
-    #         product_links[item['position']] = link
-
-    #     return product_links
+images = zappos.extract_product_images(data)
+prices = zappos.extract_product_prices(data)
+links = zappos.extract_product_links(data)
 
 
 # class ebay_deals:
