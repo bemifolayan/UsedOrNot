@@ -1,6 +1,7 @@
 import requests
 import json
 import pandas as pd
+import os
 
 class Zappos:
 
@@ -24,7 +25,7 @@ class Zappos:
         payload = []
         headers = {
 	                "content-type": "application/json",
-	                "X-RapidAPI-Key": "3abf378184msh3907cc74d161a65p11d50djsn4feb42e142fc",
+	                "X-RapidAPI-Key": os.environ.get('Zappos_API_Key'),
 	                "X-RapidAPI-Host": "zappos1.p.rapidapi.com"
                 }   
 
@@ -130,7 +131,7 @@ names = zappos.extract_product_names(data)
 images = zappos.extract_product_images(data)
 prices = zappos.extract_product_prices(data)
 links = zappos.extract_product_links(data)
-
+print(prices)
 
 # class ebay_deals:
 
