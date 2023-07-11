@@ -169,15 +169,15 @@ class ebay_deals:
         return deal_info
 
 
-# ebay = Ebay("iphone","61455")
-# json_data = ebay.search()
-#
-# product_prices = ebay.extract_product_prices(json_data)
-# product_names = ebay.extract_product_names(json_data)
-# product_images = ebay.extract_product_images(json_data)
-#
-#
-# print("Product Names:", product_names)
-# print("Product Prices:", product_prices)
-# print("Product Images:", product_images)
+ebay = Ebay("iphone","61455")
+json_data = ebay.search()
+
+product_prices = ebay.extract_product_prices(json_data)
+product_names = ebay.extract_product_names(json_data)
+product_images = ebay.extract_product_images(json_data)
+
+
+print("Product Names:", product_names)
+print("Product Prices:", product_prices)
+print("Product Images:", product_images)
 
