@@ -86,7 +86,7 @@ class Zappos:
         Extracts the prices of the products from the JSON data.
 
         Args:
-        - json_data (dict): The JSON response from the eBay API.
+        - json_data (dict): The JSON response from the Zappos API.
 
         Returns:
         - product_prices (dict): A dictionary where the keys are the positions and the values are the product prices.
@@ -108,7 +108,7 @@ class Zappos:
         Extracts the product links from the JSON data.
 
         Args:
-        - json_data (dict): The JSON response from the eBay API.
+        - json_data (dict): The JSON response from the Zappos API.
 
         Returns:
         - product_links (dict): A dict of the links of the first 10 products.
@@ -132,63 +132,3 @@ images = zappos.extract_product_images(data)
 prices = zappos.extract_product_prices(data)
 links = zappos.extract_product_links(data)
 print(prices)
-
-# class ebay_deals:
-
-#     def search(self):
-#         # set up the request parameters
-#         params = {
-#             'api_key': '4628D7F6193C4219B168D3FE361ADB2F',
-#             'type': 'deals',
-#             'url': 'https://www.ebay.com/deals'
-#         }
-
-#         # make the http GET request to Countdown API
-#         api_result = requests.get('https://api.countdownapi.com/request', params)
-
-#         # print the JSON response from Countdown API
-#         json_data = json.dumps(api_result.json())
-
-#         return json_data
-
-#     def extract_deal_info(self, json_data):
-#         """
-#         Extracts information about the first 10 items from the 'deals_results' in the JSON data.
-
-#         Args:
-#         - json_data (dict): The JSON response from the eBay API.
-
-#         Returns:
-#         - deal_info (list): A list of dictionaries containing the extracted information for each item.
-#         """
-#         if json_data is None:
-#             return None
-
-#         data = json.loads(json_data)
-#         deals_results = data["deals_results"]
-
-#         deal_info = []
-#         for result in deals_results[:10]:
-#             item_info = {
-#                 "name": result["title"],
-#                 "previous_price": result["was_price"]["raw"],
-#                 "current_price": result["price"]["raw"],
-#                 "link": result["link"],
-#                 "image": result["image"]
-#             }
-#             deal_info.append(item_info)
-
-#         return deal_info
-
-
-# ebay = Ebay("iphone","61455")
-# json_data = ebay.search()
-
-# product_prices = ebay.extract_product_prices(json_data)
-# product_names = ebay.extract_product_names(json_data)
-# product_images = ebay.extract_product_images(json_data)
-
-
-# print("Product Names:", product_names)
-# print("Product Prices:", product_prices)
-# print("Product Images:", product_images)
