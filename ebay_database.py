@@ -167,11 +167,7 @@ class Ebay:
         self.db_connection.close()
 
 
-
-
 if __name__ == "__main__":
     ebay = Ebay("iphone", "61455")  # Replace "iphone" with your desired search term and "12345" with the desired ZIP code
     ebay.save_products_to_database()
     ebay.close_database()
-
-
