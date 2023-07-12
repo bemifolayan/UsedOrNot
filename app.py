@@ -2,6 +2,7 @@ from urllib import request
 from flask import Flask, render_template, url_for, flash, redirect,request
 from flask_behind_proxy import FlaskBehindProxy
 from main_ebay import Ebay_21
+from ebay_deals import EbayDeals
 import requests
 import secrets
 
@@ -23,6 +24,12 @@ def index():
         return f"<p>{ebay.retrieve_data_from_database()}</p>"
         #return redirect(url_for('liked'))  # Redirect back to the index page after form submission
     return render_template('base.html')
+
+@app.route('/home')
+def home():
+    data = EbayDeals(name='deals')
+    return render_template('home.html', data=data)
+
     
 @app.route("/liked")
 def liked():

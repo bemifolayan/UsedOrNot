@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Welcome to UserOrNot</h1>
+    <form class="search-form" action="{{ url_for('index') }}" method="POST">
+        <input type="text" name="search" placeholder="Search...">
+        <button type="submit">Search</button>
+    </form>
+
+    <div class="row">
+        {% for item in data %}
+        <div class="col-lg-6">
+            <div class="card mb-3">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="{{ item['image'] }}" alt="{{ item['name'] }}" class="img-fluid">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title">{{ item['name'] }}</h3>
+                            <p class="card-text">Previous Price: {{ item['previous_price'] }}</p>
+                            <p class="card-text">Current Price: {{ item['current_price'] }}</p>
+                            <a href="{{ item['link'] }}" class="btn btn-primary">Link</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
