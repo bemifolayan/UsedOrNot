@@ -183,9 +183,6 @@ class Zappos:
         conn.close()
         return table
 
-if __name__ == "__main__":
-    zappos = Zappos("shoes", "61455")  # Replace "iphone" with your desired search term and "12345" with the desired ZIP code
-    zappos.returnDatabase()
-    # Connect to the database
+
     
 

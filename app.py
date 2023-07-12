@@ -22,7 +22,7 @@ def index():
         zappos_data = Zappos(search_query)
         # Use the ebay object as needed
         #flash(f"Search Query: {search_query}")
-        return f"<table>{zappos_data.returnDatabase()}</table>"
+        return f"<h1> Ebay </h1> <table>{ebay.retrieve_data_from_database()}</table> <h1> ZAPPOS </h1> <table>{zappos_data.returnDatabase()}</table> "
         #return redirect(url_for('liked'))  # Redirect back to the index page after form submission
     return render_template('base.html')
     

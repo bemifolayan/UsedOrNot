@@ -117,7 +117,3 @@ class Ebay_21(object):
         pass
 
 
-if __name__ == '__main__':
-    e = Ebay_21('iphone')
-    e.fetch()
-    print(e.retrieve_data_from_database())
