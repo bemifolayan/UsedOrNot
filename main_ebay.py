@@ -107,10 +107,11 @@ class Ebay_21(object):
         qry = "SELECT * FROM {}".format(self.name)
         with conn as connection:
             query_result = connection.execute(qry).fetchall()
-            zappos_db = pd.DataFrame(query_result,columns=["index", "name", "image", "price", "link"])
+            ebay_db = pd.DataFrame(query_result,columns=["index", "name", "image", "price", "link"])
+            table = pd.DataFrame.to_html(ebay_db)
             #first_ten_rows = zappos_db.head(10)
         conn.close()
-        return zappos_db
+        return table
 
     def parse(self):
         pass

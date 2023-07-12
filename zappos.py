@@ -2,12 +2,38 @@ import requests
 import json
 import pandas as pd
 import os
+import sqlite3
+import sqlalchemy as db
 
 class Zappos:
 
-    def __init__(self, name,zipcode):
+    def __init__(self, name):
         self.name = name
-        self.location = zipcode
+        self.db_connection = sqlite3.connect('zappos_data.db')  # Connect to the database
+        self.db_cursor = self.db_connection.cursor()
+        self.create_table()
+
+    def create_table(self):
+        # Create a table to store the product data
+        self.db_cursor.execute('''
+            CREATE TABLE IF NOT EXISTS products (
+                id INTEGER PRIMARY KEY,
+                name TEXT,
+                image TEXT,
+                price REAL,
+                link TEXT
+            )
+        ''')
+        self.db_connection.commit()
+
+    def insert_product(self, name, image, price, link):
+        # Insert a product into the database
+        self.db_cursor.execute('''
+            INSERT INTO products (name, image, price, link)
+            VALUES (?, ?, ?, ?)
+        ''', (name, image, price, link))
+        self.db_connection.commit()
+
 
     def search(self):
         """
@@ -124,11 +150,42 @@ class Zappos:
 
         return product_links
 
-zappos = Zappos("shoes", 61455)
-data = zappos.search()
-data_df = pd.DataFrame.from_dict(data)
-names = zappos.extract_product_names(data)
-images = zappos.extract_product_images(data)
-prices = zappos.extract_product_prices(data)
-links = zappos.extract_product_links(data)
-print(prices)
+    def save_products_to_database(self):
+        json_data = self.search()
+
+        product_names = self.extract_product_names(json_data)
+        product_images = self.extract_product_images(json_data)
+        product_prices = self.extract_product_prices(json_data)
+        product_links = self.extract_product_links(json_data)
+
+        for position in product_names:
+            name = product_names[position]
+            image = product_images.get(position, '')
+            price = product_prices.get(position, 0.0)
+            link = product_links.get(position, '')
+
+            self.insert_product(name, image, price, link)
+        
+
+    def close_database(self):
+        self.db_cursor.close()
+        self.db_connection.close()
+
+    def returnDatabase(self):
+        self.save_products_to_database()
+        conn = sqlite3.connect('zappos_data.db')
+        # Execute a query to retrieve data
+        qry = "SELECT * FROM products;"
+        with conn as connection:
+            query_result = connection.execute(qry).fetchall()
+            zappos_db = pd.DataFrame(query_result, columns=["index", "name", "image", "price", "link"])
+            table = pd.DataFrame.to_html(zappos_db)
+        conn.close()
+        return table
+
+if __name__ == "__main__":
+    zappos = Zappos("shoes", "61455")  # Replace "iphone" with your desired search term and "12345" with the desired ZIP code
+    zappos.returnDatabase()
+    # Connect to the database
+    
+

@@ -2,6 +2,7 @@ from urllib import request
 from flask import Flask, render_template, url_for, flash, redirect,request
 from flask_behind_proxy import FlaskBehindProxy
 from main_ebay import Ebay_21
+from zappos import Zappos
 import requests
 import secrets
 
@@ -18,9 +19,10 @@ def index():
         search_query = request.form.get('search')
         flash(f"Search Query: {search_query}")
         ebay = Ebay_21(name=search_query)
+        zappos_data = Zappos(search_query)
         # Use the ebay object as needed
         #flash(f"Search Query: {search_query}")
-        return f"<p>{ebay.retrieve_data_from_database()}</p>"
+        return f"<table>{zappos_data.returnDatabase()}</table>"
         #return redirect(url_for('liked'))  # Redirect back to the index page after form submission
     return render_template('base.html')
     
