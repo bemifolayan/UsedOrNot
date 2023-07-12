@@ -29,6 +29,9 @@
             <li class="nav-item">
                 <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('history') }}" tabindex="-1" aria-disabled="true">Search History</a>
+            </li>
         </ul>
     </div>
 </nav>
@@ -43,16 +46,20 @@
             </ul>
         </nav>
             <form class="search-form" action="{{ url_for('index') }}" method="POST">
+                {{ form.hidden_tag() }}
                 <input type="text" name="search" placeholder="Search...">
-                <button type="submit">Search</button>
+                <div class = "form-group">
+                    {{ form.submit(class="btn btn-primary")}}
+                </div>
             </form>
     </header>
 
     <aside>
-        <form method="POST" action="/">
-            {{ form.hidden_tag() }}
+        <form method="POST" id="form2" action="/">
+             {{form2.hidden_tag()}}
+             {{form2.csrf_token}}
               <div class="form-group">
-                {{ form.submit(class="btn btn-primary")}}
+                {{ form2.submit(class="btn btn-primary")}}
             </div>
           </form>
         <h2>Categories</h2>

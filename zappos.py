@@ -51,7 +51,7 @@ class Zappos:
         payload = []
         headers = {
 	                "content-type": "application/json",
-	                "X-RapidAPI-Key": os.environ.get('Zappos_API_Key'),
+	                "X-RapidAPI-Key": "3abf378184msh3907cc74d161a65p11d50djsn4feb42e142fc",
 	                "X-RapidAPI-Host": "zappos1.p.rapidapi.com"
                 }   
 
