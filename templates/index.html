@@ -27,8 +27,12 @@
   <main>
     <aside>
       <h3>Our Flask Buttons<h3/>
-        <form method="post" action="/">
+        <form method="POST" action="/">
+          {{ form.hidden_tag() }}
             <input type="submit" value="Liked" name="action1"/>
+            <div class="form-group">
+              {{ form.submit(class="btn btn-primary")}}
+          </div>
         </form>
       <h2>Categories</h2>
       <ul>
