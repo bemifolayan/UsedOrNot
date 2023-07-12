@@ -158,7 +158,7 @@ class Zappos:
         product_prices = self.extract_product_prices(json_data)
         product_links = self.extract_product_links(json_data)
 
-        for position in product_names:
+        for position in product_names[:21]:
             name = product_names[position]
             image = product_images.get(position, '')
             price = product_prices.get(position, 0.0)

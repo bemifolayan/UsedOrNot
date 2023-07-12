@@ -11,8 +11,7 @@ app = Flask(__name__)
 proxied = FlaskBehindProxy(app)  ## add this line
 app.config['SECRET_KEY'] = key
 
-
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 @app.route("/index", methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
