@@ -73,9 +73,6 @@ def index():
         ebay_products = ebay.retrieve_data_from_database()[:20]
         zappos_products = zappos_data.returnDatabase()[:20]
 
-        # print(ebay_products[0])
-        print(zappos_products)
-
         return render_template('products.html', ebay_data=ebay_products, zappos_data=zappos_products)
         # return redirect(url_for('liked'))  # Redirect back to the index page after form submission
     return render_template('home.html', form=form, form2=form2, data=data)
