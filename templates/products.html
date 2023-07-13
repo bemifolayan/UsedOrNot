@@ -1,1 +1,70 @@
-search=shoes
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Products</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">UserOrNot</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ url_for('index') }}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('liked') }}">Products Liked</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Contact Us</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<main>
+    <h1>Products</h1>
+    <div class="product-grid">
+        <div class="left-products">
+            <h2>Ebay Products</h2>
+            <div class="product-list">
+                {% for product in ebay_data %}
+                    <div class="product" id="{{ product[0] }}">
+                        <h3>{{ product[1] }}</h3>
+                        <img src="{{ product[2] }}" alt="{{ product[1] }}" height="150">
+                        <p class="price">{{ product[3] }}</p>
+                        <a href="{{ product[4] }}" class="btn">View Item</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="right-products">
+            <h2>Zappos Products</h2>
+            <div class="product-list">
+                {% for product in zappos_data %}
+                    <div class="product" id="{{ product[0] }}">
+                        <h3>{{ product[1] }}</h3>
+                        <img src="{{ product[2] }}" alt="{{ product[1] }}" height="150">
+                        <p class="price">{{ product[3] }}</p>
+                        <a href="{{ product[4] }}" class="btn">View Item</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</main>
+<!-- Optional: jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-yAZRERQQzqD40C7hMm9/3hXs1g7Z0HlOc0Sri2OIZd6AOMnsVZ8CB9vsk7r59TuA" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

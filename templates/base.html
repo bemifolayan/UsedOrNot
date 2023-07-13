@@ -28,10 +28,10 @@
                 <a class="nav-link" href="{{ url_for('liked') }}">Products Liked</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Contact Us</a>
+                <a class="nav-link" href="{{ url_for('history') }}">Search History</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                <a class="nav-link" href="#">Contact Us</a>
             </li>
         </ul>
     </div>
@@ -39,11 +39,21 @@
     <header class="custom-bg navbar-expand-lg">
         <h1>Welcome to UsedOrNot</h1>
             <form class="search-form" action="{{ url_for('index') }}" method="POST">
+                {{ form.hidden_tag() }}
                 <input type="text" name="search" placeholder="Search...">
-                <button type="submit">Search</button>
+                <div class = "form-group">
+                    {{ form.submit(class="btn btn-primary")}}
+                </div>
             </form>
     </header>
     <aside>
+        <form method="POST" id="form2" action="/">
+             {{form2.hidden_tag()}}
+             {{form2.csrf_token}}
+              <div class="form-group">
+                {{ form2.submit(class="btn btn-primary")}}
+            </div>
+          </form>
         <h2>Categories</h2>
         <ul>
             <li>Category 1</li>

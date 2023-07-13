@@ -5,6 +5,7 @@ import os
 import sqlite3
 import sqlalchemy as db
 
+
 class Zappos:
 
     def __init__(self, name):
@@ -34,7 +35,6 @@ class Zappos:
         ''', (name, image, price, link))
         self.db_connection.commit()
 
-
     def search(self):
         """
         Makes an API request to the Zappos API and retrieves the search results for the specified product name.
@@ -46,14 +46,14 @@ class Zappos:
 
         url = "https://zappos1.p.rapidapi.com/products/list"
 
-        querystring = {"page":"1","limit":"100", "query": self.name, "sort":"relevance/desc"}
+        querystring = {"page": "1", "limit": "100", "query": self.name, "sort": "relevance/desc"}
 
         payload = []
         headers = {
-	                "content-type": "application/json",
-	                "X-RapidAPI-Key": os.environ.get('Zappos_API_Key'),
-	                "X-RapidAPI-Host": "zappos1.p.rapidapi.com"
-                }   
+            "content-type": "application/json",
+            "X-RapidAPI-Key": "3abf378184msh3907cc74d161a65p11d50djsn4feb42e142fc",
+            "X-RapidAPI-Host": "zappos1.p.rapidapi.com"
+        }
 
         response = requests.post(url, json=payload, headers=headers, params=querystring)
         if response.status_code == 200:
@@ -63,7 +63,6 @@ class Zappos:
         else:
             print("Error in API request:", response.status_code)
             return None
-
 
     def extract_product_names(self, data):
         """
@@ -84,7 +83,6 @@ class Zappos:
             product_names[x] = data[x]["productName"]
         return product_names
 
-
     def extract_product_images(self, data):
         """
         Extracts the images of the products from the JSON data.
@@ -99,13 +97,11 @@ class Zappos:
         if data is None:
             return None
 
-        
         product_images = {}
         for x in range(len(data)):
             product_images[x] = data[x]["thumbnailImageUrl"]
 
         return product_images
-
 
     def extract_product_prices(self, data):
         """
@@ -127,7 +123,6 @@ class Zappos:
             product_prices[x] = data[x]["price"]
 
         return product_prices
-
 
     def extract_product_links(self, data):
         """
@@ -158,14 +153,13 @@ class Zappos:
         product_prices = self.extract_product_prices(json_data)
         product_links = self.extract_product_links(json_data)
 
-        for position in product_names[:21]:
+        for position in product_names:
             name = product_names[position]
             image = product_images.get(position, '')
             price = product_prices.get(position, 0.0)
             link = product_links.get(position, '')
 
             self.insert_product(name, image, price, link)
-        
 
     def close_database(self):
         self.db_cursor.close()
@@ -179,10 +173,9 @@ class Zappos:
         with conn as connection:
             query_result = connection.execute(qry).fetchall()
             zappos_db = pd.DataFrame(query_result, columns=["index", "name", "image", "price", "link"])
-            table = pd.DataFrame.to_html(zappos_db)
+            table = pd.DataFrame.to_numpy(zappos_db)
         conn.close()
         return table
 
 
-    
 
