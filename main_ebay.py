@@ -46,7 +46,7 @@ class Ebay_21(object):
             # pprint.pprint(response.reply)
             # print(response.reply)
 
-            for item in response.reply.searchResult.item:
+            for item in response.reply.searchResult.item[:21]:
                 item_id = item.itemId
                 name = item.title
                 image = item.galleryURL
@@ -107,16 +107,13 @@ class Ebay_21(object):
         qry = "SELECT * FROM {}".format(self.name)
         with conn as connection:
             query_result = connection.execute(qry).fetchall()
-            zappos_db = pd.DataFrame(query_result,columns=["index", "name", "image", "price", "link"])
+            ebay_db = pd.DataFrame(query_result,columns=["index", "name", "image", "price", "link"])
+            table = pd.DataFrame.to_html(ebay_db)
             #first_ten_rows = zappos_db.head(10)
         conn.close()
-        return zappos_db
+        return table
 
     def parse(self):
         pass
 
 
-if __name__ == '__main__':
-    e = Ebay_21('iphone')
-    e.fetch()
-    print(e.retrieve_data_from_database())
