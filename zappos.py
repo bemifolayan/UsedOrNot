@@ -1,9 +1,10 @@
-import requests
 import json
 import pandas as pd
 import os
+import requests
 import sqlite3
 import sqlalchemy as db
+
 
 class Zappos:
 
@@ -12,7 +13,6 @@ class Zappos:
         self.db_connection = sqlite3.connect('zappos_data.db')  # Connect to the database
         self.db_cursor = self.db_connection.cursor()
         self.create_table()
-
 
     def create_table(self):
         # Create a table to store the product data
@@ -27,7 +27,6 @@ class Zappos:
         '''.format(self.name))
         self.db_connection.commit()
 
-
     def insert_product(self, name, image, price, link):
         # Insert a product into the database
         self.db_cursor.execute('''
@@ -40,14 +39,14 @@ class Zappos:
 
         url = "https://zappos1.p.rapidapi.com/products/list"
 
-        querystring = {"page":"1","limit":"100", "query": self.name, "sort":"relevance/desc"}
+        querystring = {"page": "1", "limit": "100", "query": self.name, "sort": "relevance/desc"}
 
         payload = []
         headers = {
-	                "content-type": "application/json",
-	                "X-RapidAPI-Key": os.environ.get('Zappos_API_Key'),
-	                "X-RapidAPI-Host": "zappos1.p.rapidapi.com"
-                }   
+            "content-type": "application/json",
+            "X-RapidAPI-Key":'3abf378184msh3907cc74d161a65p11d50djsn4feb42e142fc',
+            "X-RapidAPI-Host": "zappos1.p.rapidapi.com"
+        }
 
         response = requests.post(url, json=payload, headers=headers, params=querystring)
         if response.status_code == 200:
@@ -61,13 +60,12 @@ class Zappos:
                 price = data[x]["price"]
                 link = data[x]["productUrl"]
 
-                result.append([index,name,image,price,link])
+                result.append([index, name, image, price, link])
 
             return result
         else:
             print("Error in API request:", response.status_code)
             return None
-
 
     def close_database(self):
         self.db_cursor.close()
@@ -92,10 +90,6 @@ class Zappos:
         # conn.close()
         # return table
 
-
-hello = Zappos("iPhone")
-print(hello.returnDatabase())    
-    
     # def save_products_to_database(self):
     #     json_data = self.search()
     #     product_names = self.extract_product_names(json_data)
@@ -116,4 +110,4 @@ print(hello.returnDatabase())
     #         }
     #         products.append(product)
     #     return products
- 
+

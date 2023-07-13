@@ -85,49 +85,6 @@ aside h2 {
 
 aside ul {
     text-align: left;
-}
-.navbar {
-  line-height: 30px;
-  font-size: 20px;
-}
-
-.navbar-brand {
-  font-size: 30px;
-}
-
-.navbar-nav > li > a {
-  font-size: 18px;
-}
-.navbar .nav-link:hover {
-  box-shadow: 0 5px 10px purple;
-  color: red;
-  transition: 0.5s;
-}
-
-.search-form input {
-  padding: 10px;
-}
-
-.search-button {
-  background-color: purple;
-  color: white;
-  padding: 10px;
-  border: none;
-}
-
-.search-form .search-button {
-  background-color: purple;
-  color: white;
-  padding: 10px;
-  border: none;
-}
-
-.search-button:hover {
-  background-color: #6B0F9C;
-}
-
-
-
 
 
 
@@ -227,4 +184,3 @@ h1 {
     background: url('heart-filled.png') no-repeat center;
     background-size: contain;
 }
-

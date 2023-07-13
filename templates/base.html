@@ -28,28 +28,30 @@
                 <a class="nav-link" href="{{ url_for('liked') }}">Products Liked</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Contact Us</a>
+                <a class="nav-link" href="#">Search History</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                <a class="nav-link" href="#">Contact Us</a>
             </li>
         </ul>
     </div>
 </nav>
-    <header class="custom-bg navbar-expand-lg">
-        <h1>Welcome to UsedOrNot</h1>
-            <form class="search-form" action="{{ url_for('index') }}" method="POST">
-                <input type="text" name="search" placeholder="Search...">
-                <button type="submit">Search</button>
-            </form>
-    </header>
+<header class="custom-bg navbar-expand-lg">
+    <h1>Welcome to UsedOrNot</h1>
+    <form class="search-form" action="{{ url_for('index') }}" method="POST">
+        {{ form.hidden_tag() }}
+        <input type="text" name="search" placeholder="Search...">
+        {{ form.submit(class="btn btn-primary search-button", value="Search") }}
+    </form>
+</header>
+
     <aside>
         <h2>Categories</h2>
         <ul>
-            <li>Category 1</li>
-            <li>Category 2</li>
-            <li>Category 3</li>
-            <li>Category 4</li>
+            <p><a href= "https://www.ebay.com/sch/i.html?_from=R40&_trksid=p4432023.m570.l1313&_nkw=technologies&_sacat=0"> Technologies </a></p>
+            <p><a href = "https://www.ebay.com/b/Clothing-Shoes-Accessories/11450/bn_1852545"> Clothing </a></p>
+            <p><a href = "https://www.ebay.com/b/Sporting-Goods/888/bn_1865031"> Sporting Goods </a> </p>
+            <p><a href = "https://www.ebay.com/b/Home-Garden/11700/bn_1853126"> Home and Garden </a> </p>
         </ul>
     </aside>
 <main>

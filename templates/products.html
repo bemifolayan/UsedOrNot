@@ -1,1 +1,75 @@
-search=shoes
+<!DOCTYPE html>
+<html>
+<head>
+     <title>UseOrNot Website</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Caprasimo&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/style.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light custom-bg">
+    <a class="navbar-brand" href="#">UserOrNot</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ url_for('index') }}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('liked') }}">Products Liked</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Contact Us</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+{% block content %}
+    <h1 class="center-heading">Products</h1>
+    <div class="product-grid">
+        <div class="left-products">
+            <h2>Ebay Products</h2>
+            <div class="product-list">
+                {% for product in ebay_data %}
+                    <div class="product" id="{{ product[0] }}">
+                        <div class="product-image">
+                            <img src="{{ product[2] }}" alt="{{ product[1] }}" height="150">
+                        </div>
+                        <div class="product-info">
+                            <h3>{{ product[1] }}</h3>
+                            <p class="price">Price: {{ product[3] }}</p>
+                            <a href="{{ product[4] }}" class="btn">View Item</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="right-products">
+            <h2>Zappos Products</h2>
+            <div class="product-list">
+                {% for product in zappos_data %}
+                    <div class="product" id="{{ product[0] }}">
+                        <div class="product-image">
+                            <img src="{{ product[2] }}" alt="{{ product[1] }}" height="150">
+                        </div>
+                        <div class="product-info">
+                            <h3>{{ product[1] }}</h3>
+                            <p class="price">Price: {{ product[3] }}</p>
+                            <a href="{{ product[4] }}" class="btn">View Item</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+</body>
+</html>
