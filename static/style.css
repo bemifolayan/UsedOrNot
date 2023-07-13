@@ -182,3 +182,16 @@ h2 {
 .search {
     text-align: center;
 }
+
+.btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #007BFF;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+}
+.btn:hover {
+    background-color: #0056B3;
+}
