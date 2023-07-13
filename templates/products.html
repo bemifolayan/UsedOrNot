@@ -7,7 +7,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Caprasimo&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../static/style.css">
+    <link rel="stylesheet" type="text/css" href="../static/style1.css">
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light custom-bg">
@@ -21,17 +21,22 @@
                 <a class="nav-link" href="{{ url_for('index') }}">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('liked') }}">Products Liked</a>
+                <a class="nav-link" href="{{ url_for('history') }}">Search History</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Contact Us</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li>
         </ul>
     </div>
 </nav>
+    <header class="custom-bg navbar-expand-lg">
+    <h1>Welcome to UsedOrNot</h1>
+    <form class="search-form" action="{{ url_for('index') }}" method="POST">
+        {{ form.hidden_tag() }}
+        <input type="text" name="search" placeholder="Search...">
+        {{ form.submit(class="btn btn-primary search-button", value="Search") }}
+    </form>
+</header>
 {% block content %}
     <h1 class="center-heading">Products</h1>
     <div class="product-grid">

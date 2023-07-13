@@ -126,105 +126,22 @@ aside ul {
   background-color: #6B0F9C;
 }
 
-
-
-
-
-
-
-
-.categories {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-    }
-.categories li {
-  margin-bottom: 5px;
-}
-.categories li a {
-    display: block;
-    padding: 5px;
-  background-color: #E0E0E0;
-    color: #333;
-    text-decoration: none;
-}
-.categories li a:hover {
-    background-color: #ccc;
-}
-.product {
-      display: flex;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-    .product img {
-      width: 100px;
-      height: 100px;
-      margin-right: 10px;
-    }
-    .product-details {
-      display: flex;
-      flex-direction: column;
-    }
-    .product-price {
-      font-weight: bold;
-    }
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
-}
-h1 {
-    text-align: center;
-    color: #333;
-}
-.product-grid {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-}
-.left-products,
-.right-products {
-    width: 45%;
-}
-.product {
-    border: 1px solid #ccc;
-    padding: 20px;
-    text-align: center;
-    margin-bottom: 20px;
-}
-.product h3 {
-    margin-top: 10px;
-    color: #333;
-}
-.product img {
-    width: 100%;
-    height: auto;
-}
-.product .price {
-    color: #007BFF;
-    font-weight: bold;
-}
-.product .btn {
+.btn {
     display: inline-block;
     margin-top: 10px;
     padding: 8px 16px;
-    background-color: #007BFF;
+    background-color: purple;
     color: #fff;
     text-decoration: none;
     border-radius: 4px;
 }
-.product .btn:hover {
-    background-color: #0056B3;
+.btn:hover {
+    background-color: #6B0F9C;
 }
-.like-button {
-    background: url('heart-outline.png') no-repeat center;
-    width: 30px;
-    height: 30px;
-    border: none;
-    cursor: pointer;
-}
-.like-button.liked {
-    background: url('heart-filled.png') no-repeat center;
-    background-size: contain;
-}
+
+
+
+
+
+
 
