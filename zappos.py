@@ -179,7 +179,7 @@ class Zappos:
         with conn as connection:
             query_result = connection.execute(qry).fetchall()
             zappos_db = pd.DataFrame(query_result, columns=["index", "name", "image", "price", "link"])
-            table = pd.DataFrame.to_html(zappos_db)
+            table = pd.DataFrame.to_numpy(zappos_db)
         conn.close()
         return table
 

@@ -64,7 +64,14 @@ def index():
         #flash(f"Search Query: {search_query}")
         saved_history(search_query)
         print(db.session.query(History).all())
-        return f"<h1> Ebay </h1> <table>{ebay.retrieve_data_from_database()}</table> <h1> ZAPPOS </h1> <table>{zappos_data.returnDatabase()}</table> "
+
+        ebay_products = ebay.retrieve_data_from_database()[:20]
+        zappos_products = zappos_data.returnDatabase()[:20]
+
+        # print(ebay_products[0])
+        print(zappos_products)
+
+        return render_template('products.html', ebay_data=ebay_products, zappos_data=zappos_products)
         #return redirect(url_for('liked'))  # Redirect back to the index page after form submission
     return render_template('base.html', form=form, form2=form2)
 
@@ -73,9 +80,9 @@ def index():
 def liked():
     return render_template('liked.html')
 
-@app.route("/products")
-def products():
-    return render_template('products.html')
+# @app.route("/products")
+# def products():
+#     return render_template('products.html', ebay_data=ebay_products, zappos_data=zappos_products)
 
 @app.route("/history")
 def history():

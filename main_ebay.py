@@ -108,7 +108,7 @@ class Ebay_21(object):
         with conn as connection:
             query_result = connection.execute(qry).fetchall()
             ebay_db = pd.DataFrame(query_result,columns=["index", "name", "image", "price", "link"])
-            table = pd.DataFrame.to_html(ebay_db)
+            table = pd.DataFrame.to_numpy(ebay_db)
             #first_ten_rows = zappos_db.head(10)
         conn.close()
         return table
