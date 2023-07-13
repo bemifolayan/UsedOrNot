@@ -24,9 +24,6 @@
                 <a class="nav-link" href="{{ url_for('index') }}">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('liked') }}">Products Liked</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('history') }}">Search History</a>
             </li>
             <li class="nav-item">
@@ -45,22 +42,6 @@
                 </div>
             </form>
     </header>
-    <aside>
-        <form method="POST" id="form2" action="/">
-             {{form2.hidden_tag()}}
-             {{form2.csrf_token}}
-              <div class="form-group">
-                {{ form2.submit(class="btn btn-primary")}}
-            </div>
-          </form>
-        <h2>Categories</h2>
-        <ul>
-            <li>Category 1</li>
-            <li>Category 2</li>
-            <li>Category 3</li>
-            <li>Category 4</li>
-        </ul>
-    </aside>
 <main>
     {% block content %}
     {% endblock %}

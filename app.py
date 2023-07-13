@@ -53,13 +53,21 @@ with app.app_context():
 @app.route("/home", methods=['GET', 'POST'])
 def index():
     form = SaveHistory()
-    form2 = SaveLiked()
     ebay_deals = Ebay_21(name='deals')
     data = ebay_deals.retrieve_data_from_database()[:10]
+    form2=SaveLiked()
     if form2.is_submitted() and request.form.get('search') is None:
-        print(db.session.query(Liked).all())
-        print(form.validate_on_submit)
-        print(form2.validate_on_submit)
+        search_query = request.form.get('submit')
+        flash(f"Search Query: {search_query}")
+        ebay = Ebay_22(name=search_query)
+        zappos_data = Zappos(search_query)
+
+        ebay_products = ebay.retrieve_data_from_database()[:20]
+        zappos_products = zappos_data.returnDatabase()[:20]
+
+        return render_template('products.html', ebay_data=ebay_products, zappos_data=zappos_products, form=form)
+        # print(request.form)
+        # print(request.form.get('submit'))
     if form.validate_on_submit() and request.form.get('search') is not None:
         search_query = request.form.get('search')
         flash(f"Search Query: {search_query}")
@@ -68,17 +76,14 @@ def index():
         # Use the ebay object as needed
         # flash(f"Search Query: {search_query}")
         saved_history(search_query)
-        print(db.session.query(History).all())
+        # print(db.session.query(History).all())
 
         ebay_products = ebay.retrieve_data_from_database()[:20]
         zappos_products = zappos_data.returnDatabase()[:20]
 
-        # print(ebay_products[0])
-        print(zappos_products)
-
-        return render_template('products.html', ebay_data=ebay_products, zappos_data=zappos_products)
+        return render_template('products.html', ebay_data=ebay_products, zappos_data=zappos_products, form=form)
         # return redirect(url_for('liked'))  # Redirect back to the index page after form submission
-    return render_template('home.html', form=form, form2=form2, data=data)
+    return render_template('home.html', form=form, data=data)
 
 
 
@@ -93,8 +98,13 @@ def liked():
 
 @app.route("/history")
 def history():
-    history = db.session.query(History).all()
-    return render_template('history.html', history=history)
+    history = db.session.query(History.name).all()
+    form=SaveHistory()
+    form2=SaveLiked()
+    if form2.is_submitted():
+        print(request.form)
+        print("hat")
+    return render_template('history.html', history=history, form=form, form2=form2)
 
 
 def saved_liked(id, description, url):
