@@ -1,18 +1,14 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>UseOrNot Website</title>
-    <!-- Required meta tags -->
+     <title>UseOrNot Website</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Bootstrap CSS -->
-     <link href="https://fonts.googleapis.com/css2?family=Caprasimo&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-     <link rel="stylesheet" type="text/css" href="../static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Caprasimo&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/style.css">
 </head>
-
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light custom-bg">
     <a class="navbar-brand" href="#">UserOrNot</a>
@@ -37,17 +33,21 @@
     </div>
 </nav>
 {% block content %}
-    <h1>Products</h1>
+    <h1 class="center-heading">Products</h1>
     <div class="product-grid">
         <div class="left-products">
             <h2>Ebay Products</h2>
             <div class="product-list">
                 {% for product in ebay_data %}
                     <div class="product" id="{{ product[0] }}">
-                        <h3>{{ product[1] }}</h3>
-                        <img src="{{ product[2] }}" alt="{{ product[1] }}" height="150">
-                        <p class="price">{{ product[3] }}</p>
-                        <a href="{{ product[4] }}" class="btn">View Item</a>
+                        <div class="product-image">
+                            <img src="{{ product[2] }}" alt="{{ product[1] }}" height="150">
+                        </div>
+                        <div class="product-info">
+                            <h3>{{ product[1] }}</h3>
+                            <p class="price">Price: {{ product[3] }}</p>
+                            <a href="{{ product[4] }}" class="btn">View Item</a>
+                        </div>
                     </div>
                 {% endfor %}
             </div>
@@ -57,19 +57,19 @@
             <div class="product-list">
                 {% for product in zappos_data %}
                     <div class="product" id="{{ product[0] }}">
-                        <h3>{{ product[1] }}</h3>
-                        <img src="{{ product[2] }}" alt="{{ product[1] }}" height="150">
-                        <p class="price">{{ product[3] }}</p>
-                        <a href="{{ product[4] }}" class="btn">View Item</a>
+                        <div class="product-image">
+                            <img src="{{ product[2] }}" alt="{{ product[1] }}" height="150">
+                        </div>
+                        <div class="product-info">
+                            <h3>{{ product[1] }}</h3>
+                            <p class="price">Price: {{ product[3] }}</p>
+                            <a href="{{ product[4] }}" class="btn">View Item</a>
+                        </div>
                     </div>
                 {% endfor %}
             </div>
         </div>
     </div>
 {% endblock %}
-<!-- Optional: jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-yAZRERQQzqD40C7hMm9/3hXs1g7Z0HlOc0Sri2OIZd6AOMnsVZ8CB9vsk7r59TuA" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>
