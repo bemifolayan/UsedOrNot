@@ -46,7 +46,7 @@ class Ebay_21(object):
             # pprint.pprint(response.reply)
             # print(response.reply)
 
-            for item in response.reply.searchResult.item:
+            for item in response.reply.searchResult.item[:21]:
                 item_id = item.itemId
                 name = item.title
                 image = item.galleryURL

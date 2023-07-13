@@ -2,6 +2,7 @@ from urllib import request
 from flask import Flask, render_template, url_for, flash, redirect,request
 from flask_behind_proxy import FlaskBehindProxy
 from main_ebay import Ebay_21
+from ebay_deals import EbayDeals
 from zappos import Zappos
 import requests
 import secrets
@@ -11,8 +12,7 @@ app = Flask(__name__)
 proxied = FlaskBehindProxy(app)  ## add this line
 app.config['SECRET_KEY'] = key
 
-
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 @app.route("/index", methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
@@ -25,6 +25,12 @@ def index():
         return f"<h1> Ebay </h1> <table>{ebay.retrieve_data_from_database()}</table> <h1> ZAPPOS </h1> <table>{zappos_data.returnDatabase()}</table> "
         #return redirect(url_for('liked'))  # Redirect back to the index page after form submission
     return render_template('base.html')
+
+@app.route('/home')
+def home():
+    data = EbayDeals(name='deals')
+    return render_template('home.html', data=data)
+
     
 @app.route("/liked")
 def liked():
