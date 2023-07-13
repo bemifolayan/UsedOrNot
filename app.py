@@ -73,7 +73,7 @@ def index():
         ebay_products = ebay.retrieve_data_from_database()[:20]
         zappos_products = zappos_data.returnDatabase()[:20]
 
-        return render_template('products.html', ebay_data=ebay_products, zappos_data=zappos_products)
+        return render_template('products.html', ebay_data=ebay_products, zappos_data=zappos_products, form=form, form2=form2)
         # return redirect(url_for('liked'))  # Redirect back to the index page after form submission
     return render_template('home.html', form=form, form2=form2, data=data)
 
@@ -90,8 +90,13 @@ def liked():
 
 @app.route("/history")
 def history():
-    history = db.session.query(History).all()
-    return render_template('history.html', history=history)
+    history = db.session.query(History.name).all()
+    form=SaveHistory()
+    form2=SaveLiked()
+    if form2.is_submitted():
+        print(request.form)
+        print("hat")
+    return render_template('history.html', history=history, form=form, form2=form2)
 
 
 def saved_liked(id, description, url):
