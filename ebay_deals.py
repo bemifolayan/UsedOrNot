@@ -85,4 +85,4 @@ if __name__ == '__main__':
     ebay = EbayDeals(name='deals')
     json_data = ebay.search()
     deal_info = ebay.extract_deal_info(json_data)
-    print(deal_info)
+    print(json_data)

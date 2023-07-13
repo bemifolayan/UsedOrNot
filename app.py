@@ -13,8 +13,10 @@ proxied = FlaskBehindProxy(app)  ## add this line
 app.config['SECRET_KEY'] = key
 
 @app.route("/", methods=['GET', 'POST'])
-@app.route("/index", methods=['GET', 'POST'])
+@app.route("/home", methods=['GET', 'POST'])
 def index():
+    ebay_deals = Ebay_21(name='deals')
+    data = ebay_deals.retrieve_data_from_database()[:10]
     if request.method == 'POST':
         search_query = request.form.get('search')
         flash(f"Search Query: {search_query}")
@@ -24,12 +26,9 @@ def index():
         #flash(f"Search Query: {search_query}")
         return f"<h1> Ebay </h1> <table>{ebay.retrieve_data_from_database()}</table> <h1> ZAPPOS </h1> <table>{zappos_data.returnDatabase()}</table> "
         #return redirect(url_for('liked'))  # Redirect back to the index page after form submission
-    return render_template('base.html')
-
-@app.route('/home')
-def home():
-    data = EbayDeals(name='deals')
     return render_template('home.html', data=data)
+
+
 
     
 @app.route("/liked")

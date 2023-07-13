@@ -18,6 +18,9 @@ class Ebay_21(object):
         self.db_cursor = self.db_connection.cursor()
         self.create_table()
 
+    def __iter__(self):
+        return iter(self.retrieve_data_from_database())
+
     def create_table(self):
         # Create a table to store the product data
         self.db_cursor.execute('''
@@ -47,6 +50,7 @@ class Ebay_21(object):
             # print(response.reply)
 
             for item in response.reply.searchResult.item[:21]:
+
                 item_id = item.itemId
                 name = item.title
                 image = item.galleryURL
@@ -59,6 +63,8 @@ class Ebay_21(object):
         except Exception as e:
             print("Error occurred:", e)
             return False
+
+
 
     def retrieve_data_from_database(self):
         # try:
@@ -98,22 +104,22 @@ class Ebay_21(object):
         #     return None
         self.fetch()
 
-        pd.set_option('display.max_columns', None)
-        pd.set_option('display.max_rows', None)
-        pd.set_option('display.width', None)
-
         conn = sqlite3.connect('ebay_data.db')
-        # Execute a query to retrieve data
         qry = "SELECT * FROM {}".format(self.name)
         with conn as connection:
             query_result = connection.execute(qry).fetchall()
-            ebay_db = pd.DataFrame(query_result,columns=["index", "name", "image", "price", "link"])
-            table = pd.DataFrame.to_html(ebay_db)
-            #first_ten_rows = zappos_db.head(10)
+            columns = ["index", "name", "image", "price", "link"]
+            ebay_db = [dict(zip(columns, row)) for row in query_result]
         conn.close()
-        return table
+
+        return ebay_db
 
     def parse(self):
         pass
 
 
+if __name__ == '__main__':
+    ebay = Ebay_21(name='deals')
+    ebay_items = ebay.retrieve_data_from_database()[:10]
+    for item in ebay_items:
+        print(item)

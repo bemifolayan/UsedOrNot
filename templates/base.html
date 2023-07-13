@@ -36,9 +36,7 @@
         </ul>
     </div>
 </nav>
-
-<main>
-    <header class="custom-bg navbar-expand-lg">{% block content %}
+    <header class="custom-bg navbar-expand-lg">
         <h1>Welcome to UsedOrNot</h1>
             <form class="search-form" action="{{ url_for('index') }}" method="POST">
                 <input type="text" name="search" placeholder="Search...">
@@ -54,6 +52,8 @@
             <li>Category 4</li>
         </ul>
     </aside>
+<main>
+    {% block content %}
     {% endblock %}
 </main>
 <footer>
