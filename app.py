@@ -8,7 +8,7 @@ import requests
 import secrets
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import SubmitField
 
 key = secrets.token_hex(16)
 app = Flask(__name__)
