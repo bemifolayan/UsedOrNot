@@ -57,9 +57,13 @@ def index():
     ebay_deals = Ebay_21(name='deals')
     data = ebay_deals.retrieve_data_from_database()[:10]
     if form2.is_submitted() and request.form.get('search') is None:
-        print(db.session.query(Liked).all())
-        print(form.validate_on_submit)
-        print(form2.validate_on_submit)
+        search_query = request.form.get('submit')
+        flash(f"Search Query: {search_query}")
+        ebay = Ebay_22(name=search_query)
+        zappos_data = Zappos(search_query)
+        ebay_products = ebay.retrieve_data_from_database()[:20]
+        zappos_products = zappos_data.returnDatabase()[:20]
+        return render_template('products.html', ebay_data=ebay_products, zappos_data=zappos_products, form=form)
     if form.validate_on_submit() and request.form.get('search') is not None:
         search_query = request.form.get('search')
         flash(f"Search Query: {search_query}")
