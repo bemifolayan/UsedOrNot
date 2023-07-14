@@ -1,17 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Search History</h2>
-{% for product in history %}
+<div class="cit-container">
+  <h2 class="cit">Search History</h2>
+  {% for product in history %}
     <div class="product-grid">
-        <div class="product-list">
+      <div class="product-list">
         <form action="/" method="POST">
-            {{ form2.hidden_tag() }}
-            <div>
-                {{ form2.submit(class="btn", value=product[0])}}
-            </div>
+          {{ form2.hidden_tag() }}
+          <div class="cit">
+            {{ form2.submit(class="btn", value=product[0])}}
+          </div>
         </form>
-        </div>
+      </div>
     </div>
-{% endfor %}
+  {% endfor %}
+</div>
+
+
 {% endblock %}

@@ -139,6 +139,15 @@ aside ul {
     background-color: #6B0F9C;
 }
 
+.cit-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.cit {
+  text-align: left;
+}
 
 
 
