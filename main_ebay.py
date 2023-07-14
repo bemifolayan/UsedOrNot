@@ -3,12 +3,12 @@ from ebaysdk.finding import Connection
 import os
 import sqlite3
 load_dotenv()
-#API_KEY = os.getenv('api_key')
+
 
 
 class Ebay_21(object):
     def __init__(self, name) -> None:
-        self.api_key = os.getenv('api_key')
+        self.api_key = 'DavidExc-ozzy-PRD-0425bcf8a-5dd4e9ad'
         self.name = name
         self.db_connection = sqlite3.connect('ebay_data.db')  # Connect to the database
         self.db_cursor = self.db_connection.cursor()
@@ -40,7 +40,7 @@ class Ebay_21(object):
 
     def fetch(self):
         try:
-            api = Connection(appid=self.api_key, config_file=None, siteid="EBAY-US")
+            api = Connection(appid='DavidExc-ozzy-PRD-0425bcf8a-5dd4e9ad', config_file=None, siteid="EBAY-US")
             response = api.execute('findItemsAdvanced', {'keywords': self.name})
             # pprint.pprint(response.reply)
             # print(response.reply)
