@@ -9,7 +9,7 @@ API_KEY = os.getenv('api_key')
 
 class Ebay_22(object):
     def __init__(self, name) -> None:
-        self.api_key = 'DavidExc-ozzy-PRD-0425bcf8a-5dd4e9ad'
+        self.api_key = os.getenv('api_key')
         self.name = name
         self.db_connection = sqlite3.connect('ebay_data.db')  # Connect to the database
         self.db_cursor = self.db_connection.cursor()
