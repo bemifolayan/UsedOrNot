@@ -1,18 +1,15 @@
 from dotenv import load_dotenv
-import datetime
-from ebaysdk.exception import ConnectionError
 from ebaysdk.finding import Connection
 import os
 import sqlite3
 import pandas as pd
-import pprint
 load_dotenv()
 API_KEY = os.getenv('api_key')
 
 
 class Ebay_22(object):
     def __init__(self, name) -> None:
-        self.api_key = os.getenv('api_key')
+        self.api_key = 'DavidExc-ozzy-PRD-0425bcf8a-5dd4e9ad'
         self.name = name
         self.db_connection = sqlite3.connect('ebay_data.db')  # Connect to the database
         self.db_cursor = self.db_connection.cursor()
@@ -43,8 +40,6 @@ class Ebay_22(object):
         try:
             api = Connection(appid=self.api_key, config_file=None, siteid="EBAY-US")
             response = api.execute('findItemsAdvanced', {'keywords': self.name})
-            # pprint.pprint(response.reply)
-            # print(response.reply)
 
             for item in response.reply.searchResult.item:
                 item_id = item.itemId
@@ -61,41 +56,6 @@ class Ebay_22(object):
             return False
 
     def retrieve_data_from_database(self):
-        # try:
-        #     conn = sqlite3.connect('ebay_data.db')
-        #     qry = self.db_cursor.execute("SELECT * FROM {}".format(self.name))
-        #     rows = self.db_cursor.fetchall()
-        #
-        #     # data_dict = []
-        #     # for row in rows:
-        #     #     item_id = row[0]
-        #     #     name = row[1]
-        #     #     image = row[2]
-        #     #     price = row[3]
-        #     #     link = row[4]
-        #     #     data_dict[item_id] = {
-        #     #         'name': name,
-        #     #         'image': image,
-        #     #         'price': price,
-        #     #         'link': link
-        #     #     }
-        #
-        #     #return data_dict
-        #
-        #     #self.save_products_to_database()
-        #     #conn = sqlite3.connect('zappos_data.db')
-        #     # Execute a query to retrieve data
-        #     #qry = "SELECT * FROM products;"
-        #     with conn as connection:
-        #         rows = self.db_cursor.fetchall()
-        #         zappos_db = pd.DataFrame(rows)
-        #     conn.close()
-        #     return zappos_db
-        #
-        #
-        # except Exception as e:
-        #     print("Error occurred:", e)
-        #     return None
         self.fetch()
 
         pd.set_option('display.max_columns', None)

@@ -1,18 +1,14 @@
 from dotenv import load_dotenv
-import datetime
-from ebaysdk.exception import ConnectionError
 from ebaysdk.finding import Connection
 import os
 import sqlite3
-import pandas as pd
-import pprint
 load_dotenv()
-API_KEY = os.getenv('api_key')
+#API_KEY = os.getenv('api_key')
 
 
 class Ebay_21(object):
     def __init__(self, name) -> None:
-        self.api_key = os.getenv('api_key')
+        self.api_key = 'DavidExc-ozzy-PRD-0425bcf8a-5dd4e9ad'
         self.name = name
         self.db_connection = sqlite3.connect('ebay_data.db')  # Connect to the database
         self.db_cursor = self.db_connection.cursor()
